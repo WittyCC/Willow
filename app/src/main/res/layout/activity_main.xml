@@ -22,7 +22,7 @@
         android:letterSpacing="0.1"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="25dp"
         android:textSize="100sp"
         android:textStyle="bold" />
 
@@ -37,13 +37,13 @@
         android:inputType="textPostalAddress"
         tools:layout_editor_absoluteX="90dp"
         tools:layout_editor_absoluteY="400dp"
-        android:layout_above="@+id/search_button"
+        android:layout_above="@+id/searchPropertiesButton"
         android:gravity="center"
         android:hint="Enter Address, City, or State"
         android:layout_centerHorizontal="true" />
 
     <Button
-        android:id="@+id/search_button"
+        android:id="@+id/searchPropertiesButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="10dp"
