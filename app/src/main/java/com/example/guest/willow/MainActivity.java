@@ -1,5 +1,6 @@
 package com.example.guest.willow;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,9 +25,9 @@ public class MainActivity extends AppCompatActivity {
             mSearchPropertiesButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // Code to do property search here
-                    // Toast will just be an example to see that onclicklistener works
-                    Toast.makeText(MainActivity.this, "Get this done", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(MainActivity.this, PropertiesActivity.class);
+                    startActivity(intent);
+                    // Toast.makeText(MainActivity.this, "Get this done", Toast.LENGTH_LONG).show();
                 }
             });
     }
