@@ -35,6 +35,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
             String location = mUserQuery.getText().toString();
+                if(mUserQuery.getText().toString().length() ==0) {
+                    mUserQuery.setError("Please enter a location");
+                }
             // Log.d(TAG, location);
             Intent intent = new Intent(MainActivity.this, PropertiesActivity.class);
             intent.putExtra("location", location);
