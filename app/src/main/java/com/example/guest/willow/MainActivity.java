@@ -35,13 +35,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
             String location = mUserQuery.getText().toString();
-                if(mUserQuery.getText().toString().length() ==0) {
+                if(mUserQuery.getText().toString().length() == 0) {
                     mUserQuery.setError("Please enter a location");
+                } else {
+                    // Log.d(TAG, location);
+                    Intent intent = new Intent(MainActivity.this, PropertiesActivity.class);
+                    intent.putExtra("location", location);
+                    startActivity(intent);
                 }
-            // Log.d(TAG, location);
-            Intent intent = new Intent(MainActivity.this, PropertiesActivity.class);
-            intent.putExtra("location", location);
-            startActivity(intent);
             // Toast.makeText(MainActivity.this, "Get this done", Toast.LENGTH_LONG).show();
             }
         });
