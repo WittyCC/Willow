@@ -3,6 +3,8 @@ package com.example.guest.willow.ui;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import com.example.guest.willow.adapters.ListingRecordAdapter;
 import com.example.guest.willow.services.OnboardService;
 import com.example.guest.willow.R;
 import com.example.guest.willow.models.Listing;
@@ -29,8 +32,12 @@ public class ListingsActivity extends AppCompatActivity {
 
     public static final String TAG = ListingsActivity.class.getSimpleName();
 
-    @Bind(R.id.locationTextView) TextView mLocationTextView;
-    @Bind(R.id.listView) ListView mListView;
+    @Bind(R.id.recyclerView)
+    RecyclerView mRecyclerView;
+    private ListingRecordAdapter mAdapter;
+
+//    @Bind(R.id.locationTextView) TextView mLocationTextView;
+//    @Bind(R.id.listView) ListView mListView;
 
     public ArrayList<Listing> mListings = new ArrayList<>();
 
@@ -44,21 +51,21 @@ public class ListingsActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String location = intent.getStringExtra("location");
-        mLocationTextView.setText("Here are the results for your property search in: " + location);
-        mLocationTextView.setGravity(Gravity.CENTER_HORIZONTAL);
+//        mLocationTextView.setText("Here are the results for your property search in: " + location);
+//        mLocationTextView.setGravity(Gravity.CENTER_HORIZONTAL);
 
         getListings(location);
 
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, listings);
-        mListView.setAdapter(adapter);
-
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String property = ((TextView)view).getText().toString();
-                Toast.makeText(ListingsActivity.this, property, Toast.LENGTH_LONG).show();
-            }
-        });
+//        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, listings);
+//        mListView.setAdapter(adapter);
+//
+//        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//                String property = ((TextView)view).getText().toString();
+//                Toast.makeText(ListingsActivity.this, property, Toast.LENGTH_LONG).show();
+//            }
+//        });
     }
 
     private void getListings(String location) {
@@ -75,25 +82,32 @@ public class ListingsActivity extends AppCompatActivity {
                 mListings = onboardService.processResults(response);
 
                 ListingsActivity.this.runOnUiThread(new Runnable() {
+
                     @Override
                     public void run() {
-                        String [] listingNames = new String[mListings.size()];
-                        for (int i = 0; i < listingNames.length; i++) {
-                            listingNames[i] = mListings.get(i).getLine1();
-                        }
-
-                        ArrayAdapter adapter = new ArrayAdapter(ListingsActivity.this, android.R.layout.simple_list_item_1, listingNames);
-
-                        mListView.setAdapter(adapter);
-
-                        for (Listing listing : mListings) {
-                            Log.d(TAG, "Address Line 1: " + listing.getLine1());
-                            Log.d(TAG, "Address Line 2: " + listing.getLine2());
-                            Log.d(TAG, "Locality: " + listing.getLocality());
-                            Log.d(TAG, "Postal Code: " + Double.toString(listing.getPostal1()));
-
-                        }
+                        mAdapter = new ListingRecordAdapter(getApplicationContext(), mListings);
+                        mRecyclerView.setAdapter(mAdapter);
+                        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(ListingsActivity.this);
+                        mRecyclerView.setLayoutManager(layoutManager);
+                        mRecyclerView.setHasFixedSize(true);
                     }
+//                        String [] listingNames = new String[mListings.size()];
+//                        for (int i = 0; i < listingNames.length; i++) {
+//                            listingNames[i] = mListings.get(i).getLine1();
+//                        }
+//
+//                        ArrayAdapter adapter = new ArrayAdapter(ListingsActivity.this, android.R.layout.simple_list_item_1, listingNames);
+//
+//                        mListView.setAdapter(adapter);
+//
+//                        for (Listing listing : mListings) {
+//                            Log.d(TAG, "Address Line 1: " + listing.getLine1());
+//                            Log.d(TAG, "Address Line 2: " + listing.getLine2());
+//                            Log.d(TAG, "Locality: " + listing.getLocality());
+//                            Log.d(TAG, "Postal Code: " + Double.toString(listing.getPostal1()));
+//
+//                        }
+//                    }
                 });
 //                throws
 //            } IOException {
