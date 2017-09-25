@@ -1,4 +1,4 @@
-package com.example.guest.willow;
+package com.example.guest.willow.ui;
 
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -9,8 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import android.widget.Toast;
-import android.util.Log;
+import com.example.guest.willow.R;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -39,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
                     mUserQuery.setError("Please enter a location");
                 } else {
                     // Log.d(TAG, location);
-                    Intent intent = new Intent(MainActivity.this, PropertiesActivity.class);
+                    Intent intent = new Intent(MainActivity.this, ListingsActivity.class);
                     intent.putExtra("location", location);
                     startActivity(intent);
                 }

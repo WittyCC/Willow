@@ -3,6 +3,8 @@ package com.example.guest.willow;
 import android.support.test.rule.ActivityTestRule;
 import android.view.View;
 
+import com.example.guest.willow.ui.ListingsActivity;
+
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -16,10 +18,10 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.CoreMatchers.anything;
 import static org.hamcrest.core.IsNot.not;
 
-public class PropertiesActivityInstrumentationTest {
+public class ListingsActivityInstrumentationTest {
 
     @Rule
-    public ActivityTestRule<PropertiesActivity> activityTestRule = new ActivityTestRule<>(PropertiesActivity.class);
+    public ActivityTestRule<ListingsActivity> activityTestRule = new ActivityTestRule<>(ListingsActivity.class);
 
     @Test
     public void listItemClickDisplaysToastWithCorrectProperty() {

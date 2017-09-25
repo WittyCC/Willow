@@ -2,6 +2,8 @@ package com.example.guest.willow;
 
 import android.support.test.rule.ActivityTestRule;
 
+import com.example.guest.willow.ui.MainActivity;
+
 import org.junit.Rule;
 import org.junit.Test;
 
