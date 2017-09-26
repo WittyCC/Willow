@@ -39,7 +39,7 @@
         tools:layout_editor_absoluteY="400dp"
         android:layout_above="@+id/searchPropertiesButton"
         android:gravity="center"
-        android:hint="Enter Address, City, or State"
+        android:hint="Enter Zip Code"
         android:layout_centerHorizontal="true" />
 
     <Button

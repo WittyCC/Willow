@@ -47,8 +47,8 @@ public class OnboardService {
                     String line2 = listingsJSON.getJSONObject("address").getString("line2");
                     String locality = listingsJSON.getJSONObject("address").getString("locality");
                     double postal1 = listingsJSON.getJSONObject("address").getDouble("postal1");
-                    double latitude = listingsJSON.getJSONObject("address").getDouble("latitude");
-                    double longitude = listingsJSON.getJSONObject("address").getDouble("longitude");
+                    double latitude = listingsJSON.getJSONObject("location").getDouble("latitude");
+                    double longitude = listingsJSON.getJSONObject("location").getDouble("longitude");
 
                     Listing listing = new Listing(line1, line2, locality, postal1, latitude, longitude);
 
