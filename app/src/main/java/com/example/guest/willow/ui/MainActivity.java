@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
                     mUserQuery.setError("Please enter a location");
                 } else {
                     // Log.d(TAG, location);
-                    Intent intent = new Intent(MainActivity.this, ListingsActivity.class);
+                    Intent intent = new Intent(MainActivity.this, ListingRecordActivity.class);
                     intent.putExtra("location", location);
                     startActivity(intent);
                 }

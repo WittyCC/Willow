@@ -3,7 +3,7 @@ package com.example.guest.willow;
 import android.os.Build;
 import android.widget.ListView;
 
-import com.example.guest.willow.ui.ListingsActivity;
+import com.example.guest.willow.ui.ListingRecordActivity;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,14 +18,14 @@ import static junit.framework.Assert.assertNotNull;
 @Config(constants = BuildConfig.class, sdk = Build.VERSION_CODES.LOLLIPOP)
 @RunWith(RobolectricGradleTestRunner.class)
 
-public class ListingsActivityTest {
-    private ListingsActivity activity;
+public class ListingRecordActivityTest {
+    private ListingRecordActivity activity;
     private ListView mPropertyListView;
 
     @Before
     public void setup() {
-        activity = Robolectric.setupActivity(ListingsActivity.class);
-        mPropertyListView = (ListView) activity.findViewById(R.id.listView);
+        activity = Robolectric.setupActivity(ListingRecordActivity.class);
+//        mPropertyListView = (ListView) activity.findViewById(R.id.listView);
     }
 
     @Test

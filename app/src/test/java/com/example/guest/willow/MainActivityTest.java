@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.widget.TextView;
 
-import com.example.guest.willow.ui.ListingsActivity;
+import com.example.guest.willow.ui.ListingRecordActivity;
 import com.example.guest.willow.ui.MainActivity;
 
 import org.junit.Before;
@@ -37,7 +37,7 @@ public class MainActivityTest {
     @Test
     public void secondActivityStarted() {
         activity.findViewById(R.id.searchPropertiesButton).performClick();
-        Intent expectedIntent = new Intent(activity, ListingsActivity.class);
+        Intent expectedIntent = new Intent(activity, ListingRecordActivity.class);
         ShadowActivity shadowActivity = org.robolectric.Shadows.shadowOf(activity);
         Intent actualIntent = shadowActivity.getNextStartedActivity();
         assertTrue(actualIntent.filterEquals(expectedIntent));

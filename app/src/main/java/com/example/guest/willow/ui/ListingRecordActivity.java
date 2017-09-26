@@ -5,14 +5,6 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.Gravity;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.ArrayAdapter;
-import android.widget.Toast;
 
 import com.example.guest.willow.adapters.ListingRecordAdapter;
 import com.example.guest.willow.services.OnboardService;
@@ -28,9 +20,9 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class ListingsActivity extends AppCompatActivity {
+public class ListingRecordActivity extends AppCompatActivity {
 
-    public static final String TAG = ListingsActivity.class.getSimpleName();
+    public static final String TAG = ListingRecordActivity.class.getSimpleName();
 
     @Bind(R.id.recyclerView)
     RecyclerView mRecyclerView;
@@ -45,6 +37,7 @@ public class ListingsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listings);
         ButterKnife.bind(this);
@@ -63,7 +56,7 @@ public class ListingsActivity extends AppCompatActivity {
 //            @Override
 //            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 //                String property = ((TextView)view).getText().toString();
-//                Toast.makeText(ListingsActivity.this, property, Toast.LENGTH_LONG).show();
+//                Toast.makeText(ListingRecordActivity.this, property, Toast.LENGTH_LONG).show();
 //            }
 //        });
     }
@@ -81,13 +74,13 @@ public class ListingsActivity extends AppCompatActivity {
             public void onResponse(Call call, Response response) {
                 mListings = onboardService.processResults(response);
 
-                ListingsActivity.this.runOnUiThread(new Runnable() {
+                ListingRecordActivity.this.runOnUiThread(new Runnable() {
 
                     @Override
                     public void run() {
                         mAdapter = new ListingRecordAdapter(getApplicationContext(), mListings);
                         mRecyclerView.setAdapter(mAdapter);
-                        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(ListingsActivity.this);
+                        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(ListingRecordActivity.this);
                         mRecyclerView.setLayoutManager(layoutManager);
                         mRecyclerView.setHasFixedSize(true);
                     }
@@ -96,7 +89,7 @@ public class ListingsActivity extends AppCompatActivity {
 //                            listingNames[i] = mListings.get(i).getLine1();
 //                        }
 //
-//                        ArrayAdapter adapter = new ArrayAdapter(ListingsActivity.this, android.R.layout.simple_list_item_1, listingNames);
+//                        ArrayAdapter adapter = new ArrayAdapter(ListingRecordActivity.this, android.R.layout.simple_list_item_1, listingNames);
 //
 //                        mListView.setAdapter(adapter);
 //
