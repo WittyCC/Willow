@@ -1,12 +1,20 @@
 package com.example.guest.willow.models;
 
+import org.parceler.Parcel;
+
+import java.util.ArrayList;
+
+@Parcel
+
 public class Listing {
-    private String mLine1;
-    private String mLine2;
-    private String mLocality;
-    private double mPostal1;
-    private double mLatitude;
-    private double mLongitude;
+    String mLine1;
+    String mLine2;
+    String mLocality;
+    double mPostal1;
+    double mLatitude;
+    double mLongitude;
+
+    public Listing() {}
 
     public Listing(String line1, String line2, String locality, double postal1, double latitude, double longitude) {
         this.mLine1 = line1;
