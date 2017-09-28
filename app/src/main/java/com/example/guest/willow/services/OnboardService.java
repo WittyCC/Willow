@@ -20,7 +20,8 @@ import okhttp3.Response;
 public class OnboardService {
 
     public static void findListings(String postalcode, Callback callback) {
-        OkHttpClient client = new OkHttpClient.Builder().build();
+        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(new LoggingInterceptor()).build();
+//        OkHttpClient client = new OkHttpClient.Builder().build();
 
         // Create new url using API_BASE_URL
         HttpUrl.Builder urlBuilder = HttpUrl.parse(Constants.API_BASE_URL).newBuilder();
