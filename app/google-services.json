@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "660186317805",
+    "firebase_url": "https://willow-48293.firebaseio.com",
+    "project_id": "willow-48293",
+    "storage_bucket": "willow-48293.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:660186317805:android:fe968f91fe9c38e3",
+        "android_client_info": {
+          "package_name": "com.example.guest.willow"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "660186317805-u8gd6pb50buutclmgeeovjikorqv0brn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.guest.willow",
+            "certificate_hash": "d233ddccfe46ae1d39e57770d60199d3cf3f55d3"
+          }
+        },
+        {
+          "client_id": "660186317805-hfs110r6t88mkobg8v8tb3j3qt2272r2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCT9lRl426blOa8h-z8QDkVwIiY1dJWLAw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "660186317805-hfs110r6t88mkobg8v8tb3j3qt2272r2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
