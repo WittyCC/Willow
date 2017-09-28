@@ -1,6 +1,8 @@
 package com.example.guest.willow.ui;
 
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -19,7 +21,8 @@ import butterknife.ButterKnife;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ListingDetailFragment extends Fragment {
+public class ListingDetailFragment extends Fragment implements View.OnClickListener {
+
     @Bind(R.id.line1TextView) TextView mLine1Label;
     @Bind(R.id.line2TextView) TextView mLine2Label;
     @Bind(R.id.localityTextView) TextView mLocalityLabel;
@@ -49,7 +52,18 @@ public class ListingDetailFragment extends Fragment {
         mLine1Label.setText(mListing.getLine1());
         mLine2Label.setText(mListing.getLine2());
         mLocalityLabel.setText(mListing.getLocality());
-        return inflater.inflate(R.layout.fragment_listing_detail, container, false);
+
+        mLine1Label.setOnClickListener(this);
+
+        return view;
+//        return inflater.inflate(R.layout.fragment_listing_detail, container, false);
     }
 
+    @Override
+    public void onClick(View v) {
+        if (v == mLine1Label) {
+            Intent line1Intent = new Intent(Intent.ACTION_VIEW, Uri.parse(mListing.getLine1()));
+            startActivity(line1Intent);
+        }
+    }
 }
