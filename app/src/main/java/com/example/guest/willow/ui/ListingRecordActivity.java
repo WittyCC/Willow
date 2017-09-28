@@ -1,11 +1,14 @@
 package com.example.guest.willow.ui;
 
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.example.guest.willow.Constants;
 import com.example.guest.willow.adapters.ListingRecordAdapter;
 import com.example.guest.willow.services.OnboardService;
 import com.example.guest.willow.R;
@@ -21,6 +24,8 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 public class ListingRecordActivity extends AppCompatActivity {
+    private SharedPreferences mSharedPreferences;
+    private String mRecentAddress;
 
     public static final String TAG = ListingRecordActivity.class.getSimpleName();
 
@@ -44,6 +49,12 @@ public class ListingRecordActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String location = intent.getStringExtra("location");
+
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_LOCATION_KEY, null);
+        if (mRecentAddress != null) {
+            getListings(mRecentAddress);
+        }
 //        mLocationTextView.setText("Here are the results for your property search in: " + location);
 //        mLocationTextView.setGravity(Gravity.CENTER_HORIZONTAL);
 
