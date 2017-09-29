@@ -24,13 +24,13 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 public class ListingRecordActivity extends AppCompatActivity {
-    private SharedPreferences mSharedPreferences;
-    private String mRecentAddress;
+//    private SharedPreferences mSharedPreferences;
+//    private String mRecentAddress;
 
     public static final String TAG = ListingRecordActivity.class.getSimpleName();
 
-    @Bind(R.id.recyclerView)
-    RecyclerView mRecyclerView;
+    @Bind(R.id.recyclerView) RecyclerView mRecyclerView;
+
     private ListingRecordAdapter mAdapter;
 
 //    @Bind(R.id.locationTextView) TextView mLocationTextView;
@@ -38,7 +38,7 @@ public class ListingRecordActivity extends AppCompatActivity {
 
     public ArrayList<Listing> mListings = new ArrayList<>();
 
-    private String[] listings = new String[] {"7322 Blake Pl SW", "722 Nob Hill Ave N # D", "8249 Bagley Ave N", "4324 Greenwood Ave N # A", "725 14th Ave E", "899 NW Elford Dr", "3031 NW 65th St", "808 NW 125th St", "713 Martin Luther King Jr Way S", "459 Newton St", "1020 E Shelby St", "12701 8th Ave NW"};
+//    private String[] listings = new String[] {"7322 Blake Pl SW", "722 Nob Hill Ave N # D", "8249 Bagley Ave N", "4324 Greenwood Ave N # A", "725 14th Ave E", "899 NW Elford Dr", "3031 NW 65th St", "808 NW 125th St", "713 Martin Luther King Jr Way S", "459 Newton St", "1020 E Shelby St", "12701 8th Ave NW"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,11 +50,11 @@ public class ListingRecordActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String location = intent.getStringExtra("location");
 
-        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_LOCATION_KEY, null);
-        if (mRecentAddress != null) {
-            getListings(mRecentAddress);
-        }
+//        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+//        mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_LOCATION_KEY, null);
+//        if (mRecentAddress != null) {
+//            getListings(mRecentAddress);
+//        }
 //        mLocationTextView.setText("Here are the results for your property search in: " + location);
 //        mLocationTextView.setGravity(Gravity.CENTER_HORIZONTAL);
 

@@ -13,14 +13,18 @@ import android.widget.TextView;
 
 import com.example.guest.willow.Constants;
 import com.example.guest.willow.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private SharedPreferences mSharedPreferences;
-    private SharedPreferences.Editor mEditor;
+//    private SharedPreferences mSharedPreferences;
+//    private SharedPreferences.Editor mEditor;
+
+    private DatabaseReference mSearchedLocationReference;
 
     // public static final String TAG = MainActivity.class.getSimpleName();
     @Bind(R.id.appNameTextView) TextView mAppNameTextView;
@@ -29,13 +33,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        mSearchedLocationReference = FirebaseDatabase
+                .getInstance()
+                .getReference()
+                .child(Constants.FIREBASE_CHILD_SEARCHED_LOCATION);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-
-        mEditor = mSharedPreferences.edit();
+//        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+//
+//        mEditor = mSharedPreferences.edit();
 
         Typeface appNameFont = Typeface.createFromAsset(getAssets(), "fonts/CHOPS___.TTF");
         mAppNameTextView.setTypeface(appNameFont);
@@ -47,9 +57,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         if (v == mSearchPropertiesButton) {
             String location = mUserQuery.getText().toString();
-            if(!(location).equals("")) {
-                addToSharedPreferences(location);
-            }
+
+            saveLocationToFirebase(location);
+
+//            if(!(location).equals("")) {
+//                addToSharedPreferences(location);
+//            }
 
 //        } else {
 //
@@ -58,15 +71,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        } else {
 //                    Log.d(TAG, location);
             Intent intent = new Intent(MainActivity.this, ListingRecordActivity.class);
-//                    intent.putExtra("location", location);
+            intent.putExtra("location", location);
             startActivity(intent);
         }
             // Toast.makeText(MainActivity.this, "Get this done", Toast.LENGTH_LONG).show();
     }
 
-    private void addToSharedPreferences(String location) {
-        mEditor.putString(Constants.PREFERENCES_LOCATION_KEY, location).apply();
+    public void saveLocationToFirebase(String location) {
+        mSearchedLocationReference.push().setValue(location);
     }
+
+//    private void addToSharedPreferences(String location) {
+//        mEditor.putString(Constants.PREFERENCES_LOCATION_KEY, location).apply();
+//    }
 }
 
 
