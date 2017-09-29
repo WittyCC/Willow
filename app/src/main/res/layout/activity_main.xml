@@ -30,17 +30,17 @@
         android:id="@+id/userQuery"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
         android:padding="5dp"
         android:background="#ffffff"
         android:ems="10"
         android:inputType="textPostalAddress"
         tools:layout_editor_absoluteX="90dp"
         tools:layout_editor_absoluteY="400dp"
-        android:layout_above="@+id/searchPropertiesButton"
         android:gravity="center"
         android:hint="Enter Zip Code"
-        android:layout_centerHorizontal="true" />
+        android:layout_above="@+id/searchPropertiesButton"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <Button
         android:id="@+id/searchPropertiesButton"
@@ -50,8 +50,17 @@
         android:text="Search Properties"
         tools:layout_editor_absoluteX="100dp"
         tools:layout_editor_absoluteY="447dp"
+        android:layout_above="@+id/savedListingsButton"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="My Saved Listings"
+        android:id="@+id/savedListingsButton"
+        android:visibility="visible"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="12dp" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
 
 </RelativeLayout>

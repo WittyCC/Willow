@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Bind(R.id.appNameTextView) TextView mAppNameTextView;
     @Bind (R.id.userQuery) EditText mUserQuery;
     @Bind(R.id.searchPropertiesButton) Button mSearchPropertiesButton;
+    @Bind(R.id.saveListingButton) Button mSavedListingsButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mAppNameTextView.setTypeface(appNameFont);
 
         mSearchPropertiesButton.setOnClickListener(this);
+        mSavedListingsButton.setOnClickListener(this);
     }
 
     @Override
@@ -97,6 +99,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(intent);
         }
             // Toast.makeText(MainActivity.this, "Get this done", Toast.LENGTH_LONG).show();
+
+        if (v == mSavedListingsButton) {
+            Intent intent = new Intent(MainActivity.this, SavedListingRecordActivity.class);
+            startActivity(intent);
+        }
     }
 
     public void saveLocationToFirebase(String location) {
