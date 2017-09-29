@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Bind(R.id.appNameTextView) TextView mAppNameTextView;
     @Bind (R.id.userQuery) EditText mUserQuery;
     @Bind(R.id.searchPropertiesButton) Button mSearchPropertiesButton;
-    @Bind(R.id.saveListingButton) Button mSavedListingsButton;
+    @Bind(R.id.savedListingsButton) Button mSavedListingsButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
