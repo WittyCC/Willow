@@ -57,6 +57,7 @@ public class ListingRecordAdapter extends RecyclerView.Adapter<ListingRecordAdap
         public void bindListing(Listing listing) {
             mAddress1TextView.setText(listing.getLine1());
             mAddress2TextView.setText(listing.getLine2());
+            mPostal1TextView.setText((int) listing.getPostal1());
             mLocalityTextView.setText(listing.getLocality());
         }
     }

@@ -14,6 +14,7 @@ public class Listing {
     double Postal1;
     double Latitude;
     double Longitude;
+    private String pushId;
 
     public Listing() {}
 
@@ -48,5 +49,13 @@ public class Listing {
 
     public double getmLongitude() {
         return Longitude;
+    }
+
+    public String getPushId() {
+        return pushId;
+    }
+
+    public void setPushId(String pushId) {
+        this.pushId = pushId;
     }
 }

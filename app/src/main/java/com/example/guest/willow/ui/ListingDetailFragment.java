@@ -14,6 +14,8 @@ import android.widget.Toast;
 import com.example.guest.willow.Constants;
 import com.example.guest.willow.R;
 import com.example.guest.willow.models.Listing;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -22,9 +24,6 @@ import org.parceler.Parcels;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class ListingDetailFragment extends Fragment implements View.OnClickListener {
 
     @Bind(R.id.line1TextView) TextView mLine1Label;
@@ -72,10 +71,18 @@ public class ListingDetailFragment extends Fragment implements View.OnClickListe
         }
 
         if (v == mSaveListingButton) {
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            String uid = user.getUid();
             DatabaseReference listingRef = FirebaseDatabase
                     .getInstance()
-                    .getReference(Constants.FIREBASE_CHILD_LISTINGS);
-            listingRef.push().setValue(mListing);
+                    .getReference(Constants.FIREBASE_CHILD_LISTINGS)
+                    .child(uid);
+
+            DatabaseReference pushRef = listingRef.push();
+            String pushId = pushRef.getKey();
+            mListing.setPushId(pushId);
+            pushRef.setValue(mListing);
+//            listingRef.push().setValue(mListing);
             Toast.makeText(getContext(), "Saved", Toast.LENGTH_SHORT).show();
         }
     }
