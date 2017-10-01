@@ -20,13 +20,11 @@ import org.parceler.Parcels;
 
 import java.util.ArrayList;
 
-/**
- * Created by wccha on 9/28/2017.
- */
-
 public class FirebaseListingViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
     private static final int MAX_WIDTH = 200;
     private static final int MAX_HEIGHT = 200;
+
+    public TextView mListingLine1TextView;
 
     View mView;
     Context mContext;
@@ -39,11 +37,12 @@ public class FirebaseListingViewHolder extends RecyclerView.ViewHolder implement
     }
 
     public void bindListing(Listing listing) {
-        TextView line1TextView = (TextView) mView.findViewById(R.id.line1TextView);
+        mListingLine1TextView = (TextView) mView.findViewById(R.id.line1TextView);
+//        TextView line1TextView = (TextView) mView.findViewById(R.id.line1TextView);
         TextView line2TextView = (TextView) mView.findViewById(R.id.line2TextView);
         TextView localityTextView = (TextView) mView.findViewById(R.id.localityTextView);
 
-        line1TextView.setText(listing.getLine1());
+//        line1TextView.setText(listing.getLine1());
         line2TextView.setText(listing.getLine2());
         localityTextView.setText(listing.getLocality());
     }
