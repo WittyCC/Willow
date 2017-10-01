@@ -20,7 +20,7 @@ import org.parceler.Parcels;
 
 import java.util.ArrayList;
 
-public class FirebaseListingViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class FirebaseListingViewHolder extends RecyclerView.ViewHolder {
     private static final int MAX_WIDTH = 200;
     private static final int MAX_HEIGHT = 200;
 
@@ -33,7 +33,6 @@ public class FirebaseListingViewHolder extends RecyclerView.ViewHolder implement
         super(itemView);
         mView = itemView;
         mContext = itemView.getContext();
-        itemView.setOnClickListener(this);
     }
 
     public void bindListing(Listing listing) {
@@ -47,30 +46,30 @@ public class FirebaseListingViewHolder extends RecyclerView.ViewHolder implement
         localityTextView.setText(listing.getLocality());
     }
 
-    @Override
-    public void onClick(View view) {
-        final ArrayList<Listing> listings = new ArrayList<>();
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_LISTINGS);
-        ref.addListenerForSingleValueEvent(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    listings.add(snapshot.getValue(Listing.class));
-                }
-
-                int itemPosition = getLayoutPosition();
-
-                Intent intent = new Intent(mContext, ListingDetailActivity.class);
-                intent.putExtra("position", itemPosition + "");
-                intent.putExtra("listings", Parcels.wrap(listings));
-
-                mContext.startActivity(intent);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        });
-    }
+//    @Override
+//    public void onClick(View view) {
+//        final ArrayList<Listing> listings = new ArrayList<>();
+//        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_LISTINGS);
+//        ref.addListenerForSingleValueEvent(new ValueEventListener() {
+//
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+//                    listings.add(snapshot.getValue(Listing.class));
+//                }
+//
+//                int itemPosition = getLayoutPosition();
+//
+//                Intent intent = new Intent(mContext, ListingDetailActivity.class);
+//                intent.putExtra("position", itemPosition + "");
+//                intent.putExtra("listings", Parcels.wrap(listings));
+//
+//                mContext.startActivity(intent);
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//            }
+//        });
+//    }
 }

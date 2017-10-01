@@ -15,6 +15,7 @@ public class Listing {
     double Latitude;
     double Longitude;
     private String pushId;
+    String index;
 
     public Listing() {}
 
@@ -25,6 +26,7 @@ public class Listing {
         this.Postal1 = postal1;
         this.Latitude = latitude;
         this.Longitude = longitude;
+        this.index = "not_specified";
     }
 
     public String getLine1() {
@@ -57,5 +59,13 @@ public class Listing {
 
     public void setPushId(String pushId) {
         this.pushId = pushId;
+    }
+
+    public String getIndex() {
+        return index;
+    }
+
+    public void setIndex(String index) {
+        this.index = index;
     }
 }

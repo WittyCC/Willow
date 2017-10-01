@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -45,12 +46,17 @@ public class SavedListingRecordActivity extends AppCompatActivity implements OnS
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String uid = user.getUid();
 
-        mListingReference = FirebaseDatabase
-                .getInstance()
+        Query query = FirebaseDatabase.getInstance()
                 .getReference(Constants.FIREBASE_CHILD_LISTINGS)
-                .child(uid);
+                .child(uid)
+                .orderByChild(Constants.FIREBASE_QUERY_INDEX);
 
-        mFirebaseAdapter = new FirebaseListingRecordAdapter(Listing.class, R.layout.listing_record_item_drag, FirebaseListingViewHolder.class, mListingReference, this, this);
+//        mListingReference = FirebaseDatabase
+//                .getInstance()
+//                .getReference(Constants.FIREBASE_CHILD_LISTINGS)
+//                .child(uid);
+
+        mFirebaseAdapter = new FirebaseListingRecordAdapter(Listing.class, R.layout.listing_record_item_drag, FirebaseListingViewHolder.class, query, this, this);
 
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));

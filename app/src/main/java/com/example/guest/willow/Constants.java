@@ -9,4 +9,5 @@ public class Constants {
     public static final String PREFERENCES_LOCATION_KEY = "postalcode";
     public static final String FIREBASE_CHILD_SEARCHED_LOCATION = "searchedLocation";
     public static final String FIREBASE_CHILD_LISTINGS = "listings";
+    public static final String FIREBASE_QUERY_INDEX = "index";
 }

@@ -22,7 +22,7 @@ import butterknife.ButterKnife;
 public class ListingDetailActivity extends AppCompatActivity {
     @Bind(R.id.viewPager) ViewPager mViewPager;
     private ListingPagerAdapter adapterViewPager;
-    ArrayList<Listing> mListings = new ArrayList();
+    ArrayList<Listing> mListings = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +32,7 @@ public class ListingDetailActivity extends AppCompatActivity {
 
         mListings = Parcels.unwrap(getIntent().getParcelableExtra("listings"));
 
-        int startingPosition = Integer.parseInt(getIntent().getStringExtra("position"));
+        int startingPosition = getIntent().getIntExtra("position", 0);;
 
         adapterViewPager = new ListingPagerAdapter(getSupportFragmentManager(), mListings);
         mViewPager.setAdapter(adapterViewPager);
