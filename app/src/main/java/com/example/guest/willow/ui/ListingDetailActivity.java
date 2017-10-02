@@ -32,7 +32,7 @@ public class ListingDetailActivity extends AppCompatActivity {
 
         mListings = Parcels.unwrap(getIntent().getParcelableExtra("listings"));
 
-        int startingPosition = getIntent().getIntExtra("position", 0);;
+        int startingPosition = getIntent().getIntExtra("position", 0);
 
         adapterViewPager = new ListingPagerAdapter(getSupportFragmentManager(), mListings);
         mViewPager.setAdapter(adapterViewPager);
