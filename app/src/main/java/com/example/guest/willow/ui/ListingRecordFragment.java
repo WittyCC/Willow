@@ -42,7 +42,6 @@ public class ListingRecordFragment extends Fragment {
     private String mRecentAddress;
 
     public ListingRecordFragment() {
-        // Required empty public constructor
     }
 
     @Override
@@ -66,8 +65,9 @@ public class ListingRecordFragment extends Fragment {
         if (mRecentAddress != null) {
             getListings(mRecentAddress);
         }
+
         return view;
-//        return inflater.inflate(R.layout.fragment_listing_record, container, false);
+
     }
 
     @Override
@@ -104,7 +104,7 @@ public class ListingRecordFragment extends Fragment {
         onboardService.findListings(location, new Callback() {
 
             @Override
-            public void onFailure(Call call, IOExcepton e) {
+            public void onFailure(Call call, IOException e) {
                 e.printStackTrace();
             }
 
