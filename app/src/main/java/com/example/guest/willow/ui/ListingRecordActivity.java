@@ -27,16 +27,16 @@ public class ListingRecordActivity extends AppCompatActivity {
 //    private SharedPreferences mSharedPreferences;
 //    private String mRecentAddress;
 
-    public static final String TAG = ListingRecordActivity.class.getSimpleName();
+//    public static final String TAG = ListingRecordActivity.class.getSimpleName();
 
-    @Bind(R.id.recyclerView) RecyclerView mRecyclerView;
+//    @Bind(R.id.recyclerView) RecyclerView mRecyclerView;
 
-    private ListingRecordAdapter mAdapter;
+//    private ListingRecordAdapter mAdapter;
 
 //    @Bind(R.id.locationTextView) TextView mLocationTextView;
 //    @Bind(R.id.listView) ListView mListView;
 
-    public ArrayList<Listing> mListings = new ArrayList<>();
+//    public ArrayList<Listing> mListings = new ArrayList<>();
 
 //    private String[] listings = new String[] {"7322 Blake Pl SW", "722 Nob Hill Ave N # D", "8249 Bagley Ave N", "4324 Greenwood Ave N # A", "725 14th Ave E", "899 NW Elford Dr", "3031 NW 65th St", "808 NW 125th St", "713 Martin Luther King Jr Way S", "459 Newton St", "1020 E Shelby St", "12701 8th Ave NW"};
 
@@ -45,10 +45,10 @@ public class ListingRecordActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listings);
-        ButterKnife.bind(this);
+//        ButterKnife.bind(this);
 
-        Intent intent = getIntent();
-        String location = intent.getStringExtra("location");
+//        Intent intent = getIntent();
+//        String location = intent.getStringExtra("location");
 
 //        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 //        mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_LOCATION_KEY, null);
@@ -58,7 +58,7 @@ public class ListingRecordActivity extends AppCompatActivity {
 //        mLocationTextView.setText("Here are the results for your property search in: " + location);
 //        mLocationTextView.setGravity(Gravity.CENTER_HORIZONTAL);
 
-        getListings(location);
+//        getListings(location);
 
 //        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, listings);
 //        mListView.setAdapter(adapter);
@@ -70,31 +70,31 @@ public class ListingRecordActivity extends AppCompatActivity {
 //                Toast.makeText(ListingRecordActivity.this, property, Toast.LENGTH_LONG).show();
 //            }
 //        });
-    }
+//    }
 
-    private void getListings(String location) {
-        final OnboardService onboardService = new OnboardService();
-        onboardService.findListings(location, new Callback() {
-
-            @Override
-            public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) {
-                mListings = onboardService.processResults(response);
-
-                ListingRecordActivity.this.runOnUiThread(new Runnable() {
-
-                    @Override
-                    public void run() {
-                        mAdapter = new ListingRecordAdapter(getApplicationContext(), mListings);
-                        mRecyclerView.setAdapter(mAdapter);
-                        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(ListingRecordActivity.this);
-                        mRecyclerView.setLayoutManager(layoutManager);
-                        mRecyclerView.setHasFixedSize(true);
-                    }
+//    private void getListings(String location) {
+//        final OnboardService onboardService = new OnboardService();
+//        onboardService.findListings(location, new Callback() {
+//
+//            @Override
+//            public void onFailure(Call call, IOException e) {
+//                e.printStackTrace();
+//            }
+//
+//            @Override
+//            public void onResponse(Call call, Response response) {
+//                mListings = onboardService.processResults(response);
+//
+//                ListingRecordActivity.this.runOnUiThread(new Runnable() {
+//
+//                    @Override
+//                    public void run() {
+//                        mAdapter = new ListingRecordAdapter(getApplicationContext(), mListings);
+//                        mRecyclerView.setAdapter(mAdapter);
+//                        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(ListingRecordActivity.this);
+//                        mRecyclerView.setLayoutManager(layoutManager);
+//                        mRecyclerView.setHasFixedSize(true);
+//                    }
 //                        String [] listingNames = new String[mListings.size()];
 //                        for (int i = 0; i < listingNames.length; i++) {
 //                            listingNames[i] = mListings.get(i).getLine1();
@@ -112,7 +112,7 @@ public class ListingRecordActivity extends AppCompatActivity {
 //
 //                        }
 //                    }
-                });
+//                });
 //                throws
 //            } IOException {
 //                try {
@@ -124,7 +124,7 @@ public class ListingRecordActivity extends AppCompatActivity {
 //                } catch (IOException e) {
 //                    e.printStackTrace();
 //                }
-            }
-        });
+//            }
+//        });
     }
 }

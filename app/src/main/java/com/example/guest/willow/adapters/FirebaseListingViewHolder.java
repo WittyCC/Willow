@@ -67,8 +67,6 @@ public class FirebaseListingViewHolder extends RecyclerView.ViewHolder implement
                 .scaleY(1f);
     }
 
-
-
 //    @Override
 //    public void onClick(View view) {
 //        final ArrayList<Listing> listings = new ArrayList<>();

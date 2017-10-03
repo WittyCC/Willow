@@ -22,59 +22,59 @@ import com.google.firebase.database.Query;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-public class SavedListingRecordActivity extends AppCompatActivity implements OnStartDragListener {
-    private DatabaseReference mListingReference;
-    private FirebaseListingRecordAdapter mFirebaseAdapter;
-    private ItemTouchHelper mItemTouchHelper;
-
-    @Bind(R.id.recyclerView) RecyclerView mRecyclerView;
+public class SavedListingRecordActivity extends AppCompatActivity {
+//    private DatabaseReference mListingReference;
+//    private FirebaseListingRecordAdapter mFirebaseAdapter;
+//    private ItemTouchHelper mItemTouchHelper;
+//
+//    @Bind(R.id.recyclerView) RecyclerView mRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_listings);
-        ButterKnife.bind(this);
+        setContentView(R.layout.activity_saved_listing_record);
+//        ButterKnife.bind(this);
 
-        setUpFirebaseAdapter();
+//        setUpFirebaseAdapter();
     }
 
 //        mListingReference = FirebaseDatabase.getInstance().getReference(Constants.FIREBASE_CHILD_LISTINGS);
 //        setUpFirebaseAdapter();
 
 
-    private void setUpFirebaseAdapter() {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        String uid = user.getUid();
-
-        Query query = FirebaseDatabase.getInstance()
-                .getReference(Constants.FIREBASE_CHILD_LISTINGS)
-                .child(uid)
-                .orderByChild(Constants.FIREBASE_QUERY_INDEX);
+//    private void setUpFirebaseAdapter() {
+//        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//        String uid = user.getUid();
+//
+//        Query query = FirebaseDatabase.getInstance()
+//                .getReference(Constants.FIREBASE_CHILD_LISTINGS)
+//                .child(uid)
+//                .orderByChild(Constants.FIREBASE_QUERY_INDEX);
 
 //        mListingReference = FirebaseDatabase
 //                .getInstance()
 //                .getReference(Constants.FIREBASE_CHILD_LISTINGS)
 //                .child(uid);
-
-        mFirebaseAdapter = new FirebaseListingRecordAdapter(Listing.class, R.layout.listing_record_item_drag, FirebaseListingViewHolder.class, query, this, this);
-
-        mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mRecyclerView.setAdapter(mFirebaseAdapter);
-
-        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(mFirebaseAdapter);
-        mItemTouchHelper = new ItemTouchHelper(callback);
-        mItemTouchHelper.attachToRecyclerView(mRecyclerView);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mFirebaseAdapter.cleanup();
-    }
-
-    @Override
-    public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
-        mItemTouchHelper.startDrag(viewHolder);
-    }
+//
+//        mFirebaseAdapter = new FirebaseListingRecordAdapter(Listing.class, R.layout.listing_record_item_drag, FirebaseListingViewHolder.class, query, this, this);
+//
+//        mRecyclerView.setHasFixedSize(true);
+//        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        mRecyclerView.setAdapter(mFirebaseAdapter);
+//
+//        ItemTouchHelper.Callback callback = new SimpleItemTouchHelperCallback(mFirebaseAdapter);
+//        mItemTouchHelper = new ItemTouchHelper(callback);
+//        mItemTouchHelper.attachToRecyclerView(mRecyclerView);
+//    }
+//
+//    @Override
+//    protected void onDestroy() {
+//        super.onDestroy();
+//        mFirebaseAdapter.cleanup();
+//    }
+//
+//    @Override
+//    public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
+//        mItemTouchHelper.startDrag(viewHolder);
+//    }
 }
