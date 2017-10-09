@@ -50,6 +50,14 @@
                 android:layout_alignParentEnd="true"
                 android:textColor="@color/colorPrimary"
                 android:textStyle="bold"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Save Listing"
+                android:id="@+id/saveRestaurantButton"
+                android:layout_alignParentBottom="true"
+                android:textSize="15sp" />
             
         </RelativeLayout>
     </LinearLayout>
