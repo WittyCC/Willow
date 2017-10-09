@@ -9,23 +9,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.guest.willow.Constants;
 import com.example.guest.willow.R;
 import com.example.guest.willow.models.Listing;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.parceler.Parcels;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class ListingDetailFragment extends Fragment implements View.OnClickListener {
 
     @Bind(R.id.line1TextView) TextView mLine1Label;
     @Bind(R.id.line2TextView) TextView mLine2Label;
     @Bind(R.id.localityTextView) TextView mLocalityLabel;
+    @Bind(R.id.saveListingButton) TextView mSaveListingButton;
 
     private Listing mListing;
 
@@ -55,6 +57,8 @@ public class ListingDetailFragment extends Fragment implements View.OnClickListe
 
         mLine1Label.setOnClickListener(this);
 
+        mSaveListingButton.setOnClickListener(this);
+
         return view;
 //        return inflater.inflate(R.layout.fragment_listing_detail, container, false);
     }
@@ -64,6 +68,14 @@ public class ListingDetailFragment extends Fragment implements View.OnClickListe
         if (v == mLine1Label) {
             Intent line1Intent = new Intent(Intent.ACTION_VIEW, Uri.parse(mListing.getLine1()));
             startActivity(line1Intent);
+        }
+
+        if (v == mSaveListingButton) {
+            DatabaseReference listingRef = FirebaseDatabase
+                    .getInstance()
+                    .getReference(Constants.FIREBASE_CHILD_LISTINGS);
+            listingRef.push().setValue(mListing);
+            Toast.makeText(getContext(), "Saved", Toast.LENGTH_SHORT).show();
         }
     }
 }
