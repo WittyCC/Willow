@@ -24,13 +24,12 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 public class ListingRecordActivity extends AppCompatActivity {
-    private SharedPreferences mSharedPreferences;
-    private String mRecentAddress;
+//    private SharedPreferences mSharedPreferences;
+//    private String mRecentAddress;
 
-    public static final String TAG = ListingRecordActivity.class.getSimpleName();
+//    public static final String TAG = ListingRecordActivity.class.getSimpleName();
 
-    @Bind(R.id.recyclerView)
-    RecyclerView mRecyclerView;
+    @Bind(R.id.recyclerView) RecyclerView mRecyclerView;
     private ListingRecordAdapter mAdapter;
 
 //    @Bind(R.id.locationTextView) TextView mLocationTextView;
@@ -50,11 +49,11 @@ public class ListingRecordActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String location = intent.getStringExtra("location");
 
-        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_LOCATION_KEY, null);
-        if (mRecentAddress != null) {
-            getListings(mRecentAddress);
-        }
+//        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+//        mRecentAddress = mSharedPreferences.getString(Constants.PREFERENCES_LOCATION_KEY, null);
+//        if (mRecentAddress != null) {
+//            getListings(mRecentAddress);
+//        }
 //        mLocationTextView.setText("Here are the results for your property search in: " + location);
 //        mLocationTextView.setGravity(Gravity.CENTER_HORIZONTAL);
 
