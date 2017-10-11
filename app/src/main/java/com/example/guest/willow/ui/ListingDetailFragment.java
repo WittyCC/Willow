@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,7 +30,7 @@ public class ListingDetailFragment extends Fragment implements View.OnClickListe
     @Bind(R.id.line1TextView) TextView mLine1Label;
     @Bind(R.id.line2TextView) TextView mLine2Label;
     @Bind(R.id.localityTextView) TextView mLocalityLabel;
-    @Bind(R.id.saveListingButton) TextView mSaveListingButton;
+    @Bind(R.id.saveListingButton) Button mSaveListingButton;
 
     private Listing mListing;
 
@@ -58,6 +59,8 @@ public class ListingDetailFragment extends Fragment implements View.OnClickListe
         mLocalityLabel.setText(mListing.getLocality());
 
         mLine1Label.setOnClickListener(this);
+
+        mSaveListingButton.setOnClickListener(this);
 
         return view;
 //        return inflater.inflate(R.layout.fragment_listing_detail, container, false);

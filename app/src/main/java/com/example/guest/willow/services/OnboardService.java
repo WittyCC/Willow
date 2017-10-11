@@ -1,5 +1,7 @@
 package com.example.guest.willow.services;
 
+import android.util.Log;
+
 import com.example.guest.willow.Constants;
 import com.example.guest.willow.models.Listing;
 
@@ -37,6 +39,7 @@ public class OnboardService {
     public ArrayList<Listing> processResults(Response response) {
         ArrayList<Listing> listings = new ArrayList<>();
         try {
+            Log.v("HERE", "HERE");
             String jsonData = response.body().string();
             if (response.isSuccessful()) {
                 JSONObject onboardJSON = new JSONObject(jsonData);

@@ -2,55 +2,52 @@ package com.example.guest.willow.models;
 
 import org.parceler.Parcel;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Parcel
 
 public class Listing {
-    String Line1;
-    String Line2;
-    String Locality;
-    double Postal1;
-    double Latitude;
-    double Longitude;
+    private String line1;
+    private String line2;
+    private String locality;
+    private double postal1;
+    private double latitude;
+    private double longitude;
     private String pushId;
     String index;
 
     public Listing() {}
 
     public Listing(String line1, String line2, String locality, double postal1, double latitude, double longitude) {
-        this.Line1 = line1;
-        this.Line2 = line2;
-        this.Locality = locality;
-        this.Postal1 = postal1;
-        this.Latitude = latitude;
-        this.Longitude = longitude;
+        this.line1 = line1;
+        this.line2 = line2;
+        this.locality = locality;
+        this.postal1 = postal1;
+        this.latitude = latitude;
+        this.longitude = longitude;
         this.index = "not_specified";
     }
 
     public String getLine1() {
-        return Line1;
+        return line1;
     }
 
     public String getLine2() {
-        return Line2;
+        return line2;
     }
 
     public String getLocality() {
-        return Locality;
+        return locality;
     }
 
     public double getPostal1() {
-        return Postal1;
+        return postal1;
     }
 
     public double getLatitude() {
-        return Latitude;
+        return latitude;
     }
 
     public double getmLongitude() {
-        return Longitude;
+        return longitude;
     }
 
     public String getPushId() {

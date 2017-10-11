@@ -1,26 +1,14 @@
 package com.example.guest.willow.adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.guest.willow.Constants;
 import com.example.guest.willow.R;
 import com.example.guest.willow.models.Listing;
-import com.example.guest.willow.ui.ListingDetailActivity;
 import com.example.guest.willow.util.ItemTouchHelperViewHolder;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import org.parceler.Parcels;
-
-import java.util.ArrayList;
 
 public class FirebaseListingViewHolder extends RecyclerView.ViewHolder implements ItemTouchHelperViewHolder {
     private static final int MAX_WIDTH = 200;
@@ -38,12 +26,13 @@ public class FirebaseListingViewHolder extends RecyclerView.ViewHolder implement
     }
 
     public void bindListing(Listing listing) {
-        mListingLine1TextView = (TextView) mView.findViewById(R.id.line1TextView);
-//        TextView line1TextView = (TextView) mView.findViewById(R.id.line1TextView);
-        TextView line2TextView = (TextView) mView.findViewById(R.id.line2TextView);
+        mListingLine1TextView = (TextView) mView.findViewById(R.id.listingAddress1TextView);
+        TextView line1TextView = (TextView) mView.findViewById(R.id.listingAddress1TextView);
+        TextView line2TextView = (TextView) mView.findViewById(R.id.listingAddress2TextView);
         TextView localityTextView = (TextView) mView.findViewById(R.id.localityTextView);
 
-//        line1TextView.setText(listing.getLine1());
+        mListingLine1TextView.setText(listing.getLine1());
+        line1TextView.setText(listing.getLine1());
         line2TextView.setText(listing.getLine2());
         localityTextView.setText(listing.getLocality());
     }
