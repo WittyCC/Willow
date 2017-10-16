@@ -2,13 +2,19 @@ package com.example.guest.willow.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.MotionEventCompat;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.example.guest.willow.Constants;
+import com.example.guest.willow.R;
 import com.example.guest.willow.adapters.FirebaseListingViewHolder;
 import com.example.guest.willow.models.Listing;
 import com.example.guest.willow.ui.ListingDetailActivity;
+import com.example.guest.willow.ui.ListingDetailFragment;
 import com.example.guest.willow.util.ItemTouchHelperAdapter;
 import com.example.guest.willow.util.OnStartDragListener;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -29,6 +35,7 @@ public class FirebaseListingRecordAdapter extends FirebaseRecyclerAdapter<Listin
     private Context mContext;
     private ChildEventListener mChildEventListener;
     private ArrayList<Listing> mListings = new ArrayList<>();
+    private int mOrientation;
 
     public FirebaseListingRecordAdapter(Class<Listing> modelClass, int modelLayout, Class<FirebaseListingViewHolder> viewHolderClass, Query ref, OnStartDragListener onStartDragListener, Context context) {
         super(modelClass, modelLayout, viewHolderClass, ref);
@@ -68,6 +75,12 @@ public class FirebaseListingRecordAdapter extends FirebaseRecyclerAdapter<Listin
     @Override
     protected void populateViewHolder(final FirebaseListingViewHolder viewHolder, Listing model, int position) {
         viewHolder.bindListing(model);
+
+        mOrientation = viewHolder.itemView.getResources().getConfiguration().orientation;
+        if (mOrientation == Configuration.ORIENTATION_LANDSCAPE) {
+            createDetailFragment(0);
+        }
+
         viewHolder.mListingLine1TextView.setOnTouchListener(new View.OnTouchListener(){
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -82,10 +95,15 @@ public class FirebaseListingRecordAdapter extends FirebaseRecyclerAdapter<Listin
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, ListingDetailActivity.class);
-                intent.putExtra("position", viewHolder.getAdapterPosition());
-                intent.putExtra("listings", Parcels.wrap(mListings));
-                mContext.startActivity(intent);
+                int itemPosition = viewHolder.getAdapterPosition();
+                if (mOrientation == Configuration.ORIENTATION_LANDSCAPE) {
+                    createDetailFragment(itemPosition);
+                } else {
+                    Intent intent = new Intent(mContext, ListingDetailActivity.class);
+                    intent.putExtra(Constants.EXTRA_KEY_POSITION, itemPosition);
+                    intent.putExtra(Constants.EXTRA_KEY_LISTINGS, Parcels.wrap(mListings));
+                    mContext.startActivity(intent);
+                }
             }
         });
     }
@@ -117,5 +135,12 @@ public class FirebaseListingRecordAdapter extends FirebaseRecyclerAdapter<Listin
         super.cleanup();
         setIndexInFirebase();
         mRef.removeEventListener(mChildEventListener);
+    }
+
+    private void createDetailFragment(int position) {
+        ListingDetailFragment detailFragment = ListingDetailFragment.newInstance(mListings, position);
+        FragmentTransaction ft = ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.listingDetailContainer, detailFragment);
+        ft.commit();
     }
 }

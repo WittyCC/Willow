@@ -2,6 +2,9 @@ package com.example.guest.willow.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,9 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.guest.willow.Constants;
 import com.example.guest.willow.R;
 import com.example.guest.willow.models.Listing;
 import com.example.guest.willow.ui.ListingDetailActivity;
+import com.example.guest.willow.ui.ListingDetailFragment;
 
 import org.parceler.Parcels;
 
@@ -46,18 +51,29 @@ public class ListingRecordAdapter extends RecyclerView.Adapter<ListingRecordAdap
         return mListings.size();
     }
 
-    public class ListingViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        @Bind(R.id.listingAddress1TextView) TextView mAddress1TextView;
-        @Bind(R.id.listingAddress2TextView) TextView mAddress2TextView;
-        @Bind(R.id.listingLocalityTextView) TextView mLocalityTextView;
-        @Bind(R.id.listingPostal1TextView) TextView mPostal1TextView;
+    public class ListingViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        @Bind(R.id.listingAddress1TextView)
+        TextView mAddress1TextView;
+        @Bind(R.id.listingAddress2TextView)
+        TextView mAddress2TextView;
+        @Bind(R.id.listingLocalityTextView)
+        TextView mLocalityTextView;
+        @Bind(R.id.listingPostal1TextView)
+        TextView mPostal1TextView;
         private Context mContext;
+        private int mOrientation;
 
         public ListingViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             mContext = itemView.getContext();
             itemView.setOnClickListener(this);
+
+            mOrientation = itemView.getResources().getConfiguration().orientation;
+
+            if (mOrientation == Configuration.ORIENTATION_LANDSCAPE) {
+                createDetailFragment(0);
+            }
         }
 
         public void bindListing(Listing listing) {
@@ -67,16 +83,28 @@ public class ListingRecordAdapter extends RecyclerView.Adapter<ListingRecordAdap
             mLocalityTextView.setText(listing.getLocality());
         }
 
+        private void createDetailFragment(int position) {
+            ListingDetailFragment detailFragment = ListingDetailFragment.newInstance(mListings, position);
+
+            FragmentTransaction ft = ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.listingDetailContainer, detailFragment);
+            ft.commit();
+        }
+
         @Override
         public void onClick(View v) {
             int itemPosition = getLayoutPosition();
-            Log.v("Here", "at a listing");
+            if (mOrientation == Configuration.ORIENTATION_LANDSCAPE) {
+                createDetailFragment(itemPosition);
+            } else {
+                Log.v("Here", "at a listing");
 
-            Intent intent = new Intent(mContext, ListingDetailActivity.class);
-            intent.putExtra("position", itemPosition);
-            intent.putExtra("listings", Parcels.wrap(mListings));
+                Intent intent = new Intent(mContext, ListingDetailActivity.class);
+                intent.putExtra(Constants.EXTRA_KEY_POSITION, itemPosition);
+                intent.putExtra(Constants.EXTRA_KEY_LISTINGS, Parcels.wrap(mListings));
 
-            mContext.startActivity(intent);
+                mContext.startActivity(intent);
+            }
         }
     }
 }

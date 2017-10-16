@@ -19,7 +19,7 @@ public class ListingPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return ListingDetailFragment.newInstance(mListings.get(position));
+        return ListingDetailFragment.newInstance(mListings, position);
     }
 
     @Override

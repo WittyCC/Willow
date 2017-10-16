@@ -22,6 +22,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import org.parceler.Parcels;
 
+import java.util.ArrayList;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
@@ -33,11 +35,14 @@ public class ListingDetailFragment extends Fragment implements View.OnClickListe
     @Bind(R.id.saveListingButton) Button mSaveListingButton;
 
     private Listing mListing;
+    private ArrayList<Listing> mListings;
+    private int mPosition;
 
-    public static ListingDetailFragment newInstance(Listing listing) {
+    public static ListingDetailFragment newInstance(ArrayList<Listing> listings, Integer position) {
         ListingDetailFragment listingDetailFragment = new ListingDetailFragment();
         Bundle args = new Bundle();
-        args.putParcelable("listing", Parcels.wrap(listing));
+        args.putParcelable(Constants.EXTRA_KEY_LISTINGS, Parcels.wrap(listings));
+        args.putInt(Constants.EXTRA_KEY_POSITION, position);
         listingDetailFragment.setArguments(args);
         return listingDetailFragment;
     }
@@ -45,7 +50,9 @@ public class ListingDetailFragment extends Fragment implements View.OnClickListe
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mListing = Parcels.unwrap(getArguments().getParcelable("listing"));
+        mListings = Parcels.unwrap(getArguments().getParcelable(Constants.EXTRA_KEY_LISTINGS));
+        mPosition = getArguments().getInt(Constants.EXTRA_KEY_POSITION);
+        mListing = mListings.get(mPosition);
     }
 
 
