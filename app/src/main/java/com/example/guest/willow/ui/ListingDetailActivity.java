@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
+import com.example.guest.willow.Constants;
 import com.example.guest.willow.R;
 import com.example.guest.willow.adapters.ListingPagerAdapter;
 import com.example.guest.willow.models.Listing;
@@ -30,9 +31,9 @@ public class ListingDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_listing_detail);
         ButterKnife.bind(this);
 
-        mListings = Parcels.unwrap(getIntent().getParcelableExtra("listings"));
+        mListings = Parcels.unwrap(getIntent().getParcelableExtra(Constants.EXTRA_KEY_LISTINGS));
 
-        int startingPosition = getIntent().getIntExtra("position", 0);
+        int startingPosition = getIntent().getIntExtra(Constants.EXTRA_KEY_POSITION, 0);
 
         adapterViewPager = new ListingPagerAdapter(getSupportFragmentManager(), mListings);
         mViewPager.setAdapter(adapterViewPager);

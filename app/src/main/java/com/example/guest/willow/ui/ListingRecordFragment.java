@@ -1,6 +1,7 @@
 package com.example.guest.willow.ui;
 
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -21,6 +22,7 @@ import com.example.guest.willow.R;
 import com.example.guest.willow.adapters.ListingRecordAdapter;
 import com.example.guest.willow.models.Listing;
 import com.example.guest.willow.services.OnboardService;
+import com.example.guest.willow.util.OnListingSelectedListener;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -40,6 +42,7 @@ public class ListingRecordFragment extends Fragment {
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor mEditor;
     private String mRecentAddress;
+    private OnListingSelectedListener mOnListingSelectedListener;
 
     public ListingRecordFragment() {
     }
@@ -52,6 +55,16 @@ public class ListingRecordFragment extends Fragment {
         mEditor = mSharedPreferences.edit();
 
         setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            mOnListingSelectedListener = (OnListingSelectedListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + e.getMessage());
+        }
     }
 
     @Override
@@ -115,7 +128,7 @@ public class ListingRecordFragment extends Fragment {
 
                     @Override
                     public void run() {
-                        mAdapter = new ListingRecordAdapter(getActivity(), mListings);
+                        mAdapter = new ListingRecordAdapter(getActivity(), mListings, mOnListingSelectedListener);
                         mRecyclerView.setAdapter(mAdapter);
                         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
                         mRecyclerView.setLayoutManager(layoutManager);

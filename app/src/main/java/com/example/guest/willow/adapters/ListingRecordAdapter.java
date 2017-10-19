@@ -17,6 +17,7 @@ import com.example.guest.willow.R;
 import com.example.guest.willow.models.Listing;
 import com.example.guest.willow.ui.ListingDetailActivity;
 import com.example.guest.willow.ui.ListingDetailFragment;
+import com.example.guest.willow.util.OnListingSelectedListener;
 
 import org.parceler.Parcels;
 
@@ -28,21 +29,23 @@ import butterknife.ButterKnife;
 public class ListingRecordAdapter extends RecyclerView.Adapter<ListingRecordAdapter.ListingViewHolder> {
     private ArrayList<Listing> mListings = new ArrayList<>();
     private Context mContext;
+    private OnListingSelectedListener mOnListingSelectedListener;
 
-    public ListingRecordAdapter(Context context, ArrayList<Listing> listings) {
+    public ListingRecordAdapter(Context context, ArrayList<Listing> listings, OnListingSelectedListener listingSelectedListener) {
         mContext = context;
         mListings = listings;
+        mOnListingSelectedListener = listingSelectedListener;
     }
 
     @Override
     public ListingRecordAdapter.ListingViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.listing_property_item, parent, false);
-        ListingViewHolder viewHolder = new ListingViewHolder(view);
+        ListingViewHolder viewHolder = new ListingViewHolder(view, mListings, mOnListingSelectedListener);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(ListingViewHolder holder, int position) {
+    public void onBindViewHolder(ListingRecordAdapter.ListingViewHolder holder, int position) {
         holder.bindListing(mListings.get(position));
     }
 
@@ -52,28 +55,30 @@ public class ListingRecordAdapter extends RecyclerView.Adapter<ListingRecordAdap
     }
 
     public class ListingViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        @Bind(R.id.listingAddress1TextView)
-        TextView mAddress1TextView;
-        @Bind(R.id.listingAddress2TextView)
-        TextView mAddress2TextView;
-        @Bind(R.id.listingLocalityTextView)
-        TextView mLocalityTextView;
-        @Bind(R.id.listingPostal1TextView)
-        TextView mPostal1TextView;
+        @Bind(R.id.listingAddress1TextView) TextView mAddress1TextView;
+        @Bind(R.id.listingAddress2TextView) TextView mAddress2TextView;
+        @Bind(R.id.listingLocalityTextView) TextView mLocalityTextView;
+        @Bind(R.id.listingPostal1TextView) TextView mPostal1TextView;
+
         private Context mContext;
         private int mOrientation;
+        private ArrayList<Listing> mListings = new ArrayList<>();
+        private OnListingSelectedListener mListingSelectedListener;
 
-        public ListingViewHolder(View itemView) {
+        public ListingViewHolder(View itemView, ArrayList<Listing> listings, OnListingSelectedListener listingSelectedListener) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            mContext = itemView.getContext();
-            itemView.setOnClickListener(this);
 
+            mContext = itemView.getContext();
             mOrientation = itemView.getResources().getConfiguration().orientation;
+            mListings = listings;
+            mListingSelectedListener = listingSelectedListener;
 
             if (mOrientation == Configuration.ORIENTATION_LANDSCAPE) {
                 createDetailFragment(0);
             }
+
+            itemView.setOnClickListener(this);
         }
 
         public void bindListing(Listing listing) {
@@ -85,7 +90,6 @@ public class ListingRecordAdapter extends RecyclerView.Adapter<ListingRecordAdap
 
         private void createDetailFragment(int position) {
             ListingDetailFragment detailFragment = ListingDetailFragment.newInstance(mListings, position);
-
             FragmentTransaction ft = ((FragmentActivity) mContext).getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.listingDetailContainer, detailFragment);
             ft.commit();
@@ -94,11 +98,11 @@ public class ListingRecordAdapter extends RecyclerView.Adapter<ListingRecordAdap
         @Override
         public void onClick(View v) {
             int itemPosition = getLayoutPosition();
+            mListingSelectedListener.onListingSelected(itemPosition, mListings);
+
             if (mOrientation == Configuration.ORIENTATION_LANDSCAPE) {
                 createDetailFragment(itemPosition);
             } else {
-                Log.v("Here", "at a listing");
-
                 Intent intent = new Intent(mContext, ListingDetailActivity.class);
                 intent.putExtra(Constants.EXTRA_KEY_POSITION, itemPosition);
                 intent.putExtra(Constants.EXTRA_KEY_LISTINGS, Parcels.wrap(mListings));

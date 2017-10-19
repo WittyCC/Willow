@@ -5,12 +5,12 @@ import org.parceler.Parcel;
 @Parcel
 
 public class Listing {
-    private String line1;
-    private String line2;
-    private String locality;
-    private double postal1;
-    private double latitude;
-    private double longitude;
+    String line1;
+    String line2;
+    String locality;
+    double postal1;
+    double latitude;
+    double longitude;
     private String pushId;
     String index;
 
