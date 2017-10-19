@@ -8,7 +8,7 @@ This project was generated with [Android Studio](https://developer.android.com/s
 
 1. Configuration/Dependencies
   * Android Studio to automatically generate necessary initial files for project
-  * Zillow API
+  * Onboard Informatics API
 
 2. Specs
   * Please see program specifications below.
@@ -26,7 +26,7 @@ This project was generated with [Android Studio](https://developer.android.com/s
 ## Specifications
 |Behavior|Input|Output|
 |---|---|---|
-|User enters a location where he/she is looking to purchase a property in the Search Properties input field| User enters "Seattle" and clicks Search Properties button|A list of properties for sale and their addresses that match the search criteria "Seattle" becomes viewable in the PropertiesActivity view|
+|User enters a postal code where he/she is wants to look up property in the Search Properties input field| User enters "98109" and clicks Search Properties button|A list of properties and their addresses that match the search criteria "98109" becomes viewable in the Listing Record Activity view|
 
 ## Prerequisites
 
